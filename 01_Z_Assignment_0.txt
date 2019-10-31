@@ -4,95 +4,132 @@ NOTE: Do not forget to see manual page using "--help" option in command when sea
 
 1. Install Docker, either on your native OS or on a VM. Make sure it runs. type "docker -v" to check if it's installed.
    try below commands for help
-	docker --help  ---> This command shows all available options and commands to work with images and containers
-	docker images --help ---> This command shows all the avaialble options and commands to work with docker images
-	docker ps --help ---> This command shows all the avaialble options and commands to work with docker containers
+	docker --help  		:- This command shows all available options and commands to work with images and containers
+	docker images --help 	:- This command shows all the avaialble options and commands to work with docker images
+	docker ps --help 	:- This command shows all the avaialble options and commands to work with docker containers
 
-2. Find a image from dockerhub of your choice(recommeded: nginx), don't use browser, pull the official image from dockerhub 	=>docker pull nginx
-3. List all the available images in your machine/vm, make sure you see recently pulled image in the list.                   	=>docker images
-4. Find out the "Full" ImageId of the image that you pulled and write it below.=>docker inspect nginx	
-5. Create a container of your image                                                                                         	=>docker create nginx
-6. List all the running containers  												=>docker container ps 
-7. List all the running and stopped containers											=>docker container ps -a
-8. Find out the "Full" containerId of the container and write it below.								=> docker inspect f8e32a4ad721
-9. Find out how many image layers are used to build this image.									=>docker inspect nginx
-10. Get the Apache Tomcat 7 server image from the docker hub.									=>docker pull tomcat:7
-11. Run the Apache Tomcat 7, I mean create a container of Apache Tomcat.							=>docker run -d -p 8080:8080 tomcat:7
-12. Find out what is the IP Address of the Apache Tomcat Container that it is running on					=>docker inspect 82570dcdd57b 
-13. Which Port it is using?													=>docker inspect 82570dcdd57b	
-14. Try to access the Tomcat's home page from your machine/vm.									=>curl 172.17.0.2:8080
-15. What is the disk size of Apache Tomcat image?										=>docker images tomcat
-16. Find out list of all environment variables that is configured for tomcat image, can you see JAVA_HOME and CATALINA_HOME? What did you notice about it?																=>docker inspect tomcat
-17. Find out which port is exposed for tomcat?											=>docker inspect tomcat
+2. Find a image from dockerhub of your choice(recommeded: nginx), don't use browser, pull the official image from dockerhub
+				:-docker pull nginx
+
+3. List all the available images in your machine/vm, make sure you see recently pulled image in the list.
+				:-docker images
+
+4. Find out the "Full" ImageId of the image that you pulled and write it below.
+				:-docker inspect nginx
+ 
+5. Create a container of your image 
+				:-docker create nginx
+
+6. List all the running containers
+				:-docker container ps 
+
+7. List all the running and stopped containers
+				:-docker container ps -a
+
+8. Find out the "Full" containerId of the container and write it below.
+	 			:-docker inspect f393e1b77b6d
+
+9. Find out how many image layers are used to build this image.
+	 			:-docker inspect nginx
+	
+10. Get the Apache Tomcat 7 server image from the docker hub.
+				:-docker pull tomcat:7
+
+11. Run the Apache Tomcat 7, I mean create a container of Apache Tomcat.
+	 			:-docker run -d -p 8080:8080 tomcat:7
+
+12. Find out what is the IP Address of the Apache Tomcat Container that it is running on
+				:-docker inspect d0a5224f749b
+
+13. Which Port it is using?
+				:-docker inspect d0a5224f749b
+	
+14. Try to access the Tomcat's home page from your machine/vm.
+				:-curl 172.31.43.95:8080
+
+15. What is the disk size of Apache Tomcat image?
+				:-docker images tomcat
+
+16. Find out list of all environment variables that is configured for tomcat image, can you see JAVA_HOME and CATALINA_HOME? What did you notice about it?
+				:-docker inspect tomcat
+
+17. Find out which port is exposed for tomcat?
+				:-docker inspect tomcat
+
 18. Run multiple conntainers of tomcat on different port and access it's home page.
-																=>docker run -d -p 8080:8080 tomcat:7
-																=>docker run -d -p 8081:8080 tomcat:latest
-																=>curl 172.17.0.2:8080
-																=>curl 172.17.0.2:8081
+				:-docker run -d -p 8080:8080 tomcat:7
+				:-docker run -d -p 8081:8080 tomcat:latest
+				:-curl 172.31.43.95:8080
+				:-curl 172.31.43.95:8081
+
 19. Pull ubuntu os from dockerhub, try to pull 2 images of ubuntu, Except the latest one.
-																=>docker pull ubuntu:18.04
-																=>docker pull ubuntu:latest
+				:-docker pull ubuntu:18.04
+				:-docker pull ubuntu:latest
 
-20. Run the container of ubuntu in attached mode.										=>docker attach cabb380f78e2
+20. Run the container of ubuntu in attached mode.
+				:-docker attach c8b8594d50a3
 	
-21. Run the container of another ubuntu in detached mode.									=>docker run --name test -d -it ubuntu
-	
+21. Run the container of another ubuntu in detached mode.
+				:-docker run --name testmode -d -it ubuntu
 
-22. Check how many ubuntu containers are running and stopped									=>docker ps -a | grep ubuntu
-	
+22. Check how many ubuntu containers are running and stopped
+				:-docker ps -a | grep ubuntu
 
-23. Is the tomcat container running? If no, start one.										=>docker start 82570dcdd57b
-	
+23. Is the tomcat container running? If no, start one.
+				:-docker start d0a5224f749b
 
 24. Check the logs, generated by tomcat container(don't forget to make request to tomcat's home page to see the log).
 
 25. Check if ubuntu conatiner is running? If no, start one in attached mode to the terminal.
-																=>docker start 92f5a772bca4
-																=>docker attach test
+				:-docker start c8b8594d50a3
+				:-docker attach testmode
 
 26. Login as root user in ubuntu container
+				:-default user is root user 
 	
+27. Create a file with any name in root directory
+			 	:-touch testmode
 	
-27. Create a file with any name in root directory										 =>Vi test
-																	 
-	
-28. Install software of your choice in ubuntu container using "apt-get install"							 =>apt-get -y install nginx
-																
+28. Install software of your choice in ubuntu container using "apt-get install"
+				:-apt-get -y install nginx
 
-29. Now exit the ubuntu shell, are you back to your host machine, if not, come back to the host machine.			=>exit
-	
+29. Now exit the ubuntu shell, are you back to your host machine, if not, come back to the host machine.
+				:-exit
 
-30. Check if the ubuntu container is running.											=>docker ps
-	
-	ubuntu@ip-172-31-17-208:~$ docker ps
-	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+30. Check if the ubuntu container is running.
+				:-docker ps
+	CONTAINER ID        IMAGE                                         COMMAND                  CREATED             STATUS              PORTS                  NAMES
+	f393e1b77b6d        nginx                                         "nginx -g 'daemon of…"   27 hours ago        Up 27 hours         0.0.0.0:8080->80/tcp   naughty_perlman
 
 
 31. Create a new ubuntu container out of the same image as that previous container in attached mode.
-																=>docker run --name test2 -d -it ubuntu
-																=>docker attach test2
+				:-docker run --name testmode2 -d -it ubuntu
+				:-docker attach testmode2
 
-32. Login as a root user 													=>usermod -aG sudo username
+32. Login as a root user
+				:-default user is root user 
 
+33. Check if you can see the file created in previous container, you will not see the file as well as software that you installed in the previous container. Now kill this Container.
+				:-docker kill c8b8594d50a3
 
-33. Check if you can see the file created in previous container, you will not see the file as well as software that you installed in the previous container. 
-Now kill this Container. 													=>docker kill f8e32a4ad721
+34. Do you have the previous ubuntu container where you created the file and installed the software? If no reapeat step 25 to 29.
+				:-yes 
 
-34. Do you have the previous ubuntu container where you created the file and installed the software? If no reapeat step 25 to 29.=>yes 
-
-35. Create an Image out of the existing container.										=>docker commit 92f5a772bca4 newu
-
+35. Create an Image out of the existing container.
+				:-docker commit 22da740c76dc newu
 	
 36. Now Create a Container out of this image and login into it to see if you can see the file and software installed by you in the previous container.
 	yes i can see
-																=>docker attach 82570dcdd57b
+				:-docker attach 22da740c76dc 
 
 37. Do you have running tomcat container? If yes, Stop it and kill all tomcat container.
-																=>docker kill 82570dcdd57b
+				:-docker kill d0a5224f749b
 
 38. Create an index.html file with following code in it:-
 	<h1>This is Tomcat Container</h1>
 Now, Start a tomcat container in such a way that on hitting its URL for home page it should show the above html page.
+	
+	
 
 39. type below command:-
 	docker images --help
