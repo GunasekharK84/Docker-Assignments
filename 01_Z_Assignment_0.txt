@@ -128,7 +128,17 @@ NOTE: Do not forget to see manual page using "--help" option in command when sea
 38. Create an index.html file with following code in it:-
 	<h1>This is Tomcat Container</h1>
 Now, Start a tomcat container in such a way that on hitting its URL for home page it should show the above html page.
-	
+
+	FROM tomcat:latest
+	RUN apt-get -y update
+	COPY index.html /usr/local/tomcat/webapps/ROOT/
+
+
+	docker build -t tomcat:v1 .
+
+	docker run -d -p 8082:8080 tomcat:v1
+
+	curl 172.31.43.95:8082
 	
 
 39. type below command:-
